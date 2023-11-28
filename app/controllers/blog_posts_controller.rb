@@ -6,6 +6,6 @@ class BlogPostsController < ApplicationController
   def show
     @blog_post = BlogPost.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
+    redirect_to  root_path
   end
 end
