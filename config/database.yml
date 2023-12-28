@@ -2,7 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: postgres
-  password: <%= ENV["BLOG_DATABASE_PASSWORD"] %>
+  password: password
+  host: localhost
 
 development:
   <<: *default
