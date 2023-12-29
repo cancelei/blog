@@ -3,12 +3,13 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
  # expect: [:index, :new, :create]
   def index
-    @blog_posts = BlogPost.all
+    @blog_posts = BlogPost.includes(:comments).all
   end
 
   def show
+    @post = Post.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to  root_path
+    redirect_to root_path
   end
 
   def new
