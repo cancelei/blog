@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   # get "blog_posts/:id/edit", to: "blog_posts#edit", as: :edit_blog_post
   # post "/blog_posts", to: "blog_posts#create", as: :blog_posts
 
-
+  resources :blog_posts do
+    resources :comments, only: [:new, :create]
+  end
   # Defines the root path route ("/")
   root "blog_posts#index"
+
+
 end
