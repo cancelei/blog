@@ -12,17 +12,17 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <p class="notice m-3"><%= notice %></p>
+    <p class="alert m-3"><%= alert %></p>
 
-    <div class="btn space-between">
+    <div class="space-between m-5">
       <% if user_signed_in? %>
-        <%= link_to "New Blog Post", new_blog_post_path %>
-        <%= link_to "Profile", edit_user_registration_path %>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+        <%= link_to "New Blog Post", new_blog_post_path, class: "btn" %>
+        <%= link_to "Profile", edit_user_registration_path, class: "btn" %>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn" %>
       <% else %>
-        <%= link_to "Login", new_user_session_path %>
-        <%= link_to "Sign up", new_user_registration_path %>
+        <%= link_to "Login", new_user_session_path, class: "btn" %>
+        <%= link_to "Sign up", new_user_registration_path, class: "btn" %>
       <% end %>
     </div>
     <%= yield %>

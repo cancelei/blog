@@ -20,8 +20,9 @@ class BlogPostsController < ApplicationController
     @blog_post = BlogPost.new(blog_post_params)
 
     if @blog_post.save
-      redirect_to @blog_post
+      redirect_to @blog_post, notice: 'Blog post was successfully created.'
     else
+      flash.now[:alert] = @blog_post.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end

@@ -1,5 +1,7 @@
-<h1>Edit blog</h1>
+<div class="m-5">
+    <h1 class="mt-5">Edit blog</h1>
 
-<%= render partial: "form", locals: {blog_post: @blog_post} %>
+    <%= render partial: "form", locals: {blog_post: @blog_post} %>
 
-<%= button_to "Delete", @blog_post, method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+    <%= button_to "Delete", @blog_post, method: :delete, data: {turbo_confirm: "Are you sure?"}, class: "btn btn-primary mt-3" %>
+</div>

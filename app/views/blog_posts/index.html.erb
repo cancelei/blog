@@ -1,28 +1,30 @@
-<h1>My Blog</h1>
+<div class="m-5">
+  <h1 class="mt-5">My Blog</h1>
 
-<%= link_to 'New Post', new_blog_post_path, class: 'btn btn-primary' %>
+  <%= link_to 'New Post', new_blog_post_path, class: 'btn btn-primary mt-5' %>
 
-<% @blog_posts.each do |blog_post| %>
-  <div class="blog-post">
-    <h2><%= link_to blog_post.title, blog_post %></h2>
+  <% @blog_posts.each do |blog_post| %>
+    <div class="blog-post mt-5">
+      <h2><%= link_to blog_post.title, blog_post, class: "ml-5" %></h2>
 
-    <p><%= blog_post.body %></p>
+      <p><%= blog_post.body %></p>
 
-    <p>
-      <%= link_to "Edit", edit_blog_post_path(blog_post), class: 'btn btn-warning' %>
-      <%= link_to "Destroy", blog_post, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-    </p>
+      <p class="mt-5">
+        <%= link_to "Edit", edit_blog_post_path(blog_post), class: 'btn btn-warning' %>
+        <%= link_to "Destroy", blog_post, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+      </p>
+
+      <hr>
+
+      <% blog_post.comments.each do |comment| %>
+        <div class="comment mt-3">
+          <p><%= comment.body %></p>
+        </div>
+      <% end %>
+
+      <%= link_to 'New Comment', new_blog_post_comment_path(blog_post), class: 'btn btn-primary mt-3' %>
+    </div>
 
     <hr>
-
-    <% blog_post.comments.each do |comment| %>
-      <div class="comment">
-        <p><%= comment.body %></p>
-      </div>
-    <% end %>
-
-    <%= link_to 'New Comment', new_blog_post_comment_path(blog_post), class: 'btn btn-primary' %>
-  </div>
-
-  <hr>
-<% end %>
+  <% end %>
+</div>
