@@ -17,16 +17,30 @@
       <p class="alert m-3"><%= alert %></p>
     </div>
 
-    <div class="space-between m-5">
+    <div class="navbar ml-5 sm">
       <% if user_signed_in? %>
-        <%= link_to "New Blog Post", new_blog_post_path, class: "btn" %>
-        <%= link_to "Profile", edit_user_registration_path, class: "btn" %>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn" %>
+        <div class=""> 
+          <div class="items-stretch">
+            <% unless current_page?(new_blog_post_path) %>
+              <%= link_to "New Blog Post", new_blog_post_path, class: "btn" %>
+            <% end %>
+            <% unless current_page?(edit_user_registration_path) %>
+              <%= link_to "Profile", edit_user_registration_path, class: "btn" %>
+            <% end %>
+          </div>
+          <div class="">
+            <%= button_to 'Log out', destroy_user_session_path, method: :delete, form: { "data-turbo-frame": "_top" }, class: "btn" %>
+          </div>
+        </div>
       <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn" %>
-        <%= link_to "Sign up", new_user_registration_path, class: "btn" %>
+        <% unless current_page?(new_user_session_path) %>
+          <%= link_to "Login", new_user_session_path, class: "btn" %>
+        <% end %>
+        <% unless current_page?(new_user_registration_path) %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn" %>
+        <% end %>
       <% end %>
     </div>
     <%= yield %>
-  </body>
+</body>
 </html>

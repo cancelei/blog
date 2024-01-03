@@ -1,5 +1,7 @@
 <div class="m-5">
-    <h1>New Blog Post</h1>
+    <%= link_to 'Return to all Blog Posts', '/blog_posts', class: 'btn mb-5' %>
+
+    <h1 class="font-bold text-lg">Create a New Blog Post</h1>
 
     <%= render partial: "form", locals: {blog_post: @blog_post} %>
 </div>
