@@ -6,4 +6,14 @@
     <p class="mt-2">
         <%= @blog_post.body %>
     </p>
+
+    <!-- Display Comments -->
+    <div class="comments">
+        <h2 class="font-bold mt-5 mb-3">Comments</h2>
+        <% @blog_post.comments.each do |comment| %>
+            <div class="comment mt-2 mb-2">
+                <p><%= comment.body %></p>
+            </div>
+        <% end %>
+    </div>
 </div>
