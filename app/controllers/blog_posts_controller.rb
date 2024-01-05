@@ -4,7 +4,9 @@ class BlogPostsController < ApplicationController
  # expect: [:index, :new, :create]
   def index
     if params[:search].present?
-      @blog_posts = BlogPost.left_outer_joins(:comments).where("blog_posts.title LIKE :search OR comments.body LIKE :search", search: "%#{params[:search]}%").distinct
+      @blog_posts = BlogPost.left_outer_joins(:comments)
+                            .where("blog_posts.title LIKE :search OR comments.body LIKE :search", search: "%#{params[:search]}%")
+                            .distinct
     else
       @blog_posts = BlogPost.all
     end
