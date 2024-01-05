@@ -3,7 +3,13 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
  # expect: [:index, :new, :create]
   def index
-    @blog_posts = BlogPost.includes(:comments).all
+    puts @blog_posts.inspect
+    if params[:search].present?
+      puts @blog_posts.inspect
+      @blog_posts = BlogPost.joins(:comments).where("blog_posts.title LIKE :search OR comments.body LIKE :search", search: "%#{params[:search]}%").distinct
+    else
+      @blog_posts = BlogPost.all
+    end
   end
 
   def show
