@@ -5,7 +5,7 @@ class BlogPostsController < ApplicationController
   def index
     if params[:search].present?
       @blog_posts = BlogPost.left_outer_joins(:comments)
-                            .where("blog_posts.title LIKE :search OR comments.body LIKE :search", search: "%#{params[:search]}%")
+                            .where("blog_posts.title LIKE :search OR blog_posts.body LIKE :search", search: "%#{params[:search]}%")
                             .distinct
     else
       @blog_posts = BlogPost.all
