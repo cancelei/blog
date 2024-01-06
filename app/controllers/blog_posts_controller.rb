@@ -8,12 +8,12 @@ class BlogPostsController < ApplicationController
                             .where("blog_posts.title LIKE :search OR blog_posts.body LIKE :search", search: "%#{params[:search]}%")
                             .distinct
     else
-      @blog_posts = BlogPost.all
+      @blog_posts = BlogPost.published_at
     end
   end
 
   def show
-    @post = BlogPost.find(params[:id])
+    @blog_post = BlogPost.published_at.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
@@ -52,13 +52,14 @@ class BlogPostsController < ApplicationController
   end
 
   def set_blog_post
-    @blog_post = BlogPost.find(params[:id])
+    @blog_post = user_signed_in? ? BlogPost.find(params[:id]) : BlogPost.published_at.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
     redirect_to blog_posts_path, alert: "Blog post not found." if @blog_post.nil?
   end
 
   private
 
   def blog_post_params
-    params.require(:blog_post).permit(:title, :body)
+    params.require(:blog_post).permit(:title, :body, :published_at)
   end
 end
